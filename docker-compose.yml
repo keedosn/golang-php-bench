@@ -1,0 +1,36 @@
+version: '3.7'
+
+x-cache-from:
+  - &app-cache-from
+    cache_from:
+      - ${NGINX_IMAGE:-nginx:1.19-alpine}
+      - ${PHP_IMAGE:-php:7.4-fpm-alpine}
+
+services:
+    php:
+      build:
+        context: .
+        target: php
+        <<: *app-cache-from
+      volumes: 
+        - ./php-app:/var/www/app
+      networks: 
+        - bench-network
+
+    nginx:
+      build:
+        context: .
+        target: nginx
+        <<: *app-cache-from
+      volumes:
+        - ./php-app:/var/www/app
+      ports:
+        - 80:80
+      networks:
+        - bench-network
+      depends_on: 
+        - php
+
+networks: 
+  bench-network:
+    driver: bridge

@@ -1,0 +1,14 @@
+$ ab -n 100 -c 10
+
+### Golang (net/http)
+Requests per second:    222.90 [#/sec] (mean)
+Time per request:       44.864 [ms] (mean)
+Time per request:       4.486 [ms] (mean, across all concurrent requests)
+Transfer rate:          29.82 [Kbytes/sec] received
+
+
+### PHP (nginx)
+Requests per second:    188.21 [#/sec] (mean)
+Time per request:       53.133 [ms] (mean)
+Time per request:       5.313 [ms] (mean, across all concurrent requests)
+Transfer rate:          35.03 [Kbytes/sec] receive
